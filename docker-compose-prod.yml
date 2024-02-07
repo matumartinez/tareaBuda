@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    command: gunicorn tareaBuda.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/code
+      - static_volume:/code/staticfiles
+    expose:
+      - 8000
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DEBUG=${DEBUG}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    depends_on:
+      - db
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+    - ./nginx:/etc/nginx/conf.d
+    - static_volume:/code/staticfiles
+    depends_on:
+      - web
+
+volumes:
+  static_volume:
