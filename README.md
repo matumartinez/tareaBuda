@@ -13,12 +13,12 @@ datos la información del spread de cada mercado.
 Instalar docker y docker-compose en tu computador. Crear .env en la raiz del proyecto 
 y poner las siguientes variables de entorno:
 
-POSTGRES_DB=tarea_buda_db
-POSTGRES_USER=tarea_buda_user
-POSTGRES_PASSWORD=tarea_buda_password
-DEBUG=True
-SECRET_KEY=django-insecure-lg9%bb4wap7@ux@i8w(e2-&h=oxjxygt_5$z@az_!1ze*&vjt+
-ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+- POSTGRES_DB=tarea_buda_db
+- POSTGRES_USER=tarea_buda_user
+- POSTGRES_PASSWORD=tarea_buda_password
+- DEBUG=True
+- SECRET_KEY=django-insecure-lg9%bb4wap7@ux@i8w(e2-&h=oxjxygt_5$z@az_!1ze*&vjt+
+- ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
 
 Posteriormente, iniciar docker y correr:
 
@@ -29,7 +29,7 @@ docker-compose run web python manage.py migrate
 docker-compose run web python manage.py updateSpreads
 ```
 
-Para correr los tests:
+Para correr los tests (se encuentrar en spreadAPI/tests.py):
 
 ```
 docker-compose run web python manage.py test
