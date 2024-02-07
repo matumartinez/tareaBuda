@@ -50,15 +50,12 @@ docker-compose up
 
 ## Obtener el spread de todos los mercados
 
-```
 localhost:8000/spreads
-```
 
 ## Obtener el spread de un mercado
 
-```
 localhost:8000/spreads/{id}
-```
 
 En esta vista también se puede modificar el alert_spread en el json de abajo y pulsar el 
-botón PATCH de la esquina inferior derecha para cambiar este parámetro
+botón PATCH de la esquina inferior derecha para cambiar este parámetro. Para que el cambio
+sea válido, el alert_spread insertado debe ser un float.

@@ -7,8 +7,6 @@ class SpreadapiConfig(AppConfig):
     name = 'spreadAPI'
 
     def ready(self):
-        print("AAAAA")
-        print(settings.COMMAND)
         if settings.COMMAND == ["runserver"] or settings.COMMAND == ["--bind"]:
             from spreadAPI.management.commands.updateSpreads import Command
             Command().handle(scheduler = "background")
